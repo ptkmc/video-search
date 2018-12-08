@@ -15,10 +15,21 @@
   align-items: flex-start !important;
 }
 
+.video-item.item .content {
+  margin: 0 1em 0 0;
+  text-align: right;
+}
+
 .video-item.item.right .content {
   margin: 0 0 0 1em;
+  text-align: left;
 }
 
 .video-item.item img {
   max-width: 180px;
+}
+
+.content .sub.header {
+  font-weight: 400 !important;
+  color: rgb(0, 0, 0, 0.6) !important;
 }

@@ -1,10 +1,10 @@
 import React from 'react';
-import VideoItem from './VideoItem';
+import VimeoVideoItem from './VimeoVideoItem';
 
-const VideoList = ({ videos, onVideoSelect }) => {
+const VimeoVideoList = ({ videos, onVideoSelect }) => {
   const renderedList = videos.map(video => {
     return (
-      <VideoItem
+      <VimeoVideoItem
         key={video.resource_key}
         onVideoSelect={onVideoSelect}
         video={video}
@@ -15,4 +15,4 @@ const VideoList = ({ videos, onVideoSelect }) => {
   return <div className="ui relaxed divided list">{renderedList}</div>;
 };
 
-export default VideoList;
+export default VimeoVideoList;

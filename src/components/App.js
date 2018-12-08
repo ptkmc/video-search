@@ -1,31 +1,50 @@
 import React from 'react';
 import vimeo from '../apis/vimeo';
+import youtube from '../apis/youtube';
 import SearchBar from './SearchBar';
-import VideoList from './VideoList';
-import VideoDetail from './VideoDetail';
+import VimeoVideoList from './VimeoVideoList';
+import VimeoVideoDetail from './VimeoVideoDetail';
+import YoutubeVideoList from './YoutubeVideoList';
+import YoutubeVideoDetail from './YoutubeVideoDetail';
 
 class App extends React.Component {
-  state = { videos: [], selectedVideo: null };
+  state = {
+    youtubeVideos: [],
+    vimeoVideos: [],
+    selectedYoutubeVideo: null,
+    selectedVimeoVideo: null
+  };
 
   componentDidMount() {
-    this.onTermSubmit('animation');
+    this.onTermSubmit('buildings');
   }
 
   onTermSubmit = async term => {
-    const response = await vimeo.get('/videos', {
+    // TODO: filter out channels from youtube results
+    const vimeoResponse = await vimeo.get('/videos', {
       params: {
         query: term
       }
     });
 
-    console.log(response);
+    const youtubeResponse = await youtube.get('/search', {
+      params: {
+        q: term
+      }
+    });
+
+    console.log(youtubeResponse, vimeoResponse);
     this.setState({
-      videos: response.data.data,
-      selectedVideo: response.data.data[0]
+      youtubeVideos: youtubeResponse.data.items,
+      selectedYoutubeVideo: youtubeResponse.data.items[0],
+      vimeoVideos: vimeoResponse.data.data,
+      selectedVimeoVideo: vimeoResponse.data.data[0]
     });
   };
 
   onVideoSelect = video => {
+    console.log(video);
+    // TODO: set selected youtube and vimeo state seperately
     this.setState({ selectedVideo: video });
   };
 
@@ -36,17 +55,17 @@ class App extends React.Component {
         <div className="ui grid">
           <div className="ui row">
             <div className="eight wide column">
-              <VideoDetail video={this.state.selectedVideo} />
-              <VideoList
+              <YoutubeVideoDetail video={this.state.selectedYoutubeVideo} />
+              <YoutubeVideoList
                 onVideoSelect={this.onVideoSelect}
-                videos={this.state.videos}
+                videos={this.state.youtubeVideos}
               />
             </div>
             <div className="eight wide column">
-              <VideoDetail video={this.state.selectedVideo} />
-              <VideoList
+              <VimeoVideoDetail video={this.state.selectedVimeoVideo} />
+              <VimeoVideoList
                 onVideoSelect={this.onVideoSelect}
-                videos={this.state.videos}
+                videos={this.state.vimeoVideos}
               />
             </div>
           </div>

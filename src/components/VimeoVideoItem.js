@@ -1,7 +1,7 @@
 import React from 'react';
 import './VideoItem.css';
 
-const VideoItem = ({ video, onVideoSelect }) => {
+const VimeoVideoItem = ({ video, onVideoSelect }) => {
   return (
     <div onClick={() => onVideoSelect(video)} className="video-item item right">
       <div className="video-row">
@@ -11,13 +11,14 @@ const VideoItem = ({ video, onVideoSelect }) => {
           alt={video.name}
         />
         <div className="content">
-          <div className="ui header">{video.name}</div>
-          {video.user.name}
-          {/* <p>{video.description}</p> */}
+          <h4 className="ui small header">
+            {video.name}
+            <div className="sub header">{video.user.name}</div>
+          </h4>
         </div>
       </div>
     </div>
   );
 };
 
-export default VideoItem;
+export default VimeoVideoItem;

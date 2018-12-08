@@ -1,6 +1,6 @@
 import React from 'react';
 
-const VideoDetail = ({ video }) => {
+const VimeoVideoDetail = ({ video }) => {
   if (!video) {
     return <div>Loading...</div>;
   }
@@ -14,11 +14,14 @@ const VideoDetail = ({ video }) => {
         <iframe title="video player" src={videoSrc} />
       </div>
       <div className="ui segment">
-        <h4 className="ui header">{video.name}</h4>
+        <h2 className="ui medium header">
+          {video.name}
+          <div className="sub header">{video.user.name}</div>
+        </h2>
         <p>{video.description}</p>
       </div>
     </div>
   );
 };
 
-export default VideoDetail;
+export default VimeoVideoDetail;
