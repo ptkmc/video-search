@@ -10,7 +10,7 @@ import YoutubeVideoDetail from './YoutubeVideoDetail';
 
 class App extends React.Component {
   state = {
-    defaultQuery: 'buildings',
+    defaultQuery: 'animation',
     youtubeVideos: [],
     vimeoVideos: [],
     selectedYoutubeVideo: null,
@@ -22,7 +22,6 @@ class App extends React.Component {
   }
 
   onTermSubmit = async term => {
-    // TODO: filter out channels from youtube results
     const vimeoResponse = await vimeo.get('/videos', {
       params: {
         query: term
@@ -45,9 +44,12 @@ class App extends React.Component {
   };
 
   onVideoSelect = video => {
-    console.log(video);
-    // TODO: set selected youtube and vimeo state seperately
-    this.setState({ selectedVideo: video });
+    console.log(video.kind);
+    if (video.kind && video.kind === 'youtube#searchResult') {
+      this.setState({ selectedYoutubeVideo: video });
+    } else {
+      this.setState({ selectedVimeoVideo: video });
+    }
   };
 
   render() {
