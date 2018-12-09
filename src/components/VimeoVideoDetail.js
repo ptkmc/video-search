@@ -9,7 +9,7 @@ const VimeoVideoDetail = ({ video }) => {
   const videoSrc = `https://player.vimeo.com/video/${re.exec(video.uri)[0]}`;
 
   return (
-    <div>
+    <div className="video-details">
       <div className="ui embed">
         <iframe title="video player" src={videoSrc} />
       </div>
@@ -18,7 +18,7 @@ const VimeoVideoDetail = ({ video }) => {
           {video.name}
           <div className="sub header">{video.user.name}</div>
         </h2>
-        <p>{video.description}</p>
+        <p>{`${video.description.substring(0, 100)}...`}</p>
       </div>
     </div>
   );

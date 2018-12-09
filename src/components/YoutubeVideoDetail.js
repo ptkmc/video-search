@@ -8,7 +8,7 @@ const YoutubeVideoDetail = ({ video }) => {
   const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}`;
 
   return (
-    <div>
+    <div className="video-details">
       <div className="ui embed">
         <iframe title="video player" src={videoSrc} />
       </div>
@@ -17,7 +17,7 @@ const YoutubeVideoDetail = ({ video }) => {
           {video.snippet.title}
           <div className="sub header">{video.snippet.channelTitle}</div>
         </h2>
-        <p>{video.snippet.description}</p>
+        <p>{`${video.snippet.description.substring(0, 100)}...`}</p>
       </div>
     </div>
   );

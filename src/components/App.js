@@ -1,6 +1,7 @@
 import React from 'react';
 import vimeo from '../apis/vimeo';
 import youtube from '../apis/youtube';
+import Headroom from 'react-headroom';
 import SearchBar from './SearchBar';
 import VimeoVideoList from './VimeoVideoList';
 import VimeoVideoDetail from './VimeoVideoDetail';
@@ -9,6 +10,7 @@ import YoutubeVideoDetail from './YoutubeVideoDetail';
 
 class App extends React.Component {
   state = {
+    defaultQuery: 'buildings',
     youtubeVideos: [],
     vimeoVideos: [],
     selectedYoutubeVideo: null,
@@ -16,7 +18,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    this.onTermSubmit('buildings');
+    this.onTermSubmit(this.state.defaultQuery);
   }
 
   onTermSubmit = async term => {
@@ -51,18 +53,31 @@ class App extends React.Component {
   render() {
     return (
       <div className="ui container">
-        <SearchBar onTermSubmit={this.onTermSubmit} />
+        <Headroom>
+          <div className="ui container search-bar">
+            <SearchBar
+              default={this.state.defaultQuery}
+              onTermSubmit={this.onTermSubmit}
+            />
+          </div>
+        </Headroom>
         <div className="ui grid">
-          <div className="ui row">
+          <div className="ui row video-details-container">
             <div className="eight wide column">
               <YoutubeVideoDetail video={this.state.selectedYoutubeVideo} />
+            </div>
+            <div className="eight wide column">
+              <VimeoVideoDetail video={this.state.selectedVimeoVideo} />
+            </div>
+          </div>
+          <div className="ui row">
+            <div className="eight wide column">
               <YoutubeVideoList
                 onVideoSelect={this.onVideoSelect}
                 videos={this.state.youtubeVideos}
               />
             </div>
             <div className="eight wide column">
-              <VimeoVideoDetail video={this.state.selectedVimeoVideo} />
               <VimeoVideoList
                 onVideoSelect={this.onVideoSelect}
                 videos={this.state.vimeoVideos}

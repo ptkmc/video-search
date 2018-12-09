@@ -1,0 +1,27 @@
+.video-details-container {
+  position: sticky !important;
+  top: 0px;
+  z-index: 1;
+  padding: 0px !important;
+}
+
+.video-details {
+  z-index: 1;
+  padding: 10px 0 0 0 !important;
+  background-color: #ffffff !important;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 10px -10px black;
+}
+
+.search-bar {
+  padding: 0 0 20px 0;
+}
+
+.headroom {
+  z-index: 2 !important;
+}
+
+.headroom--unpinned {
+  transition: none !important;
+}
