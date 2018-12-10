@@ -10,11 +10,12 @@ import YoutubeVideoDetail from './YoutubeVideoDetail';
 
 class App extends React.Component {
   state = {
-    defaultQuery: 'animation',
+    defaultQuery: 'zoidberg',
     youtubeVideos: [],
     vimeoVideos: [],
     selectedYoutubeVideo: null,
-    selectedVimeoVideo: null
+    selectedVimeoVideo: null,
+    loadingStatus: 'loading'
   };
 
   componentDidMount() {
@@ -23,28 +24,22 @@ class App extends React.Component {
 
   onTermSubmit = async term => {
     const vimeoResponse = await vimeo.get('/videos', {
-      params: {
-        query: term
-      }
+      params: { query: term }
     });
-
     const youtubeResponse = await youtube.get('/search', {
-      params: {
-        q: term
-      }
+      params: { q: term }
     });
-
     console.log(youtubeResponse, vimeoResponse);
     this.setState({
       youtubeVideos: youtubeResponse.data.items,
       selectedYoutubeVideo: youtubeResponse.data.items[0],
       vimeoVideos: vimeoResponse.data.data,
-      selectedVimeoVideo: vimeoResponse.data.data[0]
+      selectedVimeoVideo: vimeoResponse.data.data[0],
+      loadingStatus: ''
     });
   };
 
   onVideoSelect = video => {
-    console.log(video.kind);
     if (video.kind && video.kind === 'youtube#searchResult') {
       this.setState({ selectedYoutubeVideo: video });
     } else {
@@ -52,18 +47,24 @@ class App extends React.Component {
     }
   };
 
+  onLoading = e => this.setState({ loadingStatus: 'loading' });
+
   render() {
     return (
       <div className="ui container">
-        <Headroom>
-          <div className="ui container search-bar">
-            <SearchBar
-              default={this.state.defaultQuery}
-              onTermSubmit={this.onTermSubmit}
-            />
-          </div>
-        </Headroom>
         <div className="ui grid">
+          <div className="ui row header header-search">
+            <Headroom>
+              <div className="ui container" style={{ width: '50%' }}>
+                <SearchBar
+                  default={this.state.defaultQuery}
+                  onTermSubmit={this.onTermSubmit}
+                  loadingStatus={this.state.loadingStatus}
+                  onLoading={this.onLoading}
+                />
+              </div>
+            </Headroom>
+          </div>
           <div className="ui row video-details-container">
             <div className="eight wide column">
               <YoutubeVideoDetail video={this.state.selectedYoutubeVideo} />

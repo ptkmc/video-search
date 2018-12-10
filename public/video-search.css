@@ -14,12 +14,16 @@
   box-shadow: 0 8px 10px -10px black;
 }
 
-.search-bar {
-  padding: 0 0 20px 0;
+.header-search {
+  display: block !important;
+  padding: 36px 0 0 0 !important;
 }
 
 .headroom {
   z-index: 2 !important;
+  padding: 6px 0 0 0;
+  display: flex;
+  justify-content: center;
 }
 
 .headroom--unpinned {

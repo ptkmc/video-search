@@ -9,25 +9,26 @@ class SearchBar extends React.Component {
 
   onFormSubmit = event => {
     event.preventDefault();
-
+    this.props.onLoading();
     this.props.onTermSubmit(this.state.term);
   };
 
   render() {
     return (
-      <div className="search-bar ui segment">
-        <form className="ui form" onSubmit={this.onFormSubmit}>
-          <div className="field">
-            <label>Video Search</label>
+      <form onSubmit={this.onFormSubmit}>
+        <div className={`ui ${this.props.loadingStatus} search`}>
+          <div className="ui icon input" style={{ width: '100%' }}>
             <input
+              className="prompt"
               type="text"
-              value={this.state.term}
-              onChange={this.onInputChange}
               placeholder={`${this.props.default}`}
+              onChange={this.onInputChange}
             />
+            <i className="search icon" />
           </div>
-        </form>
-      </div>
+          <div className="results" />
+        </div>
+      </form>
     );
   }
 }
