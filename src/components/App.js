@@ -1,6 +1,7 @@
 import React from 'react';
 import vimeo from '../apis/vimeo';
 import youtube from '../apis/youtube';
+import { animateScroll as scroll } from 'react-scroll';
 import Headroom from 'react-headroom';
 import SearchBar from './SearchBar';
 import VimeoVideoList from './VimeoVideoList';
@@ -23,6 +24,7 @@ class App extends React.Component {
   }
 
   onTermSubmit = async term => {
+    scroll.scrollToTop();
     const vimeoResponse = await vimeo.get('/videos', {
       params: { query: term }
     });
