@@ -29,3 +29,12 @@
 .headroom--unpinned {
   transition: none !important;
 }
+
+.clamp-lines__button {
+  font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: rgb(0, 0, 0, 0.6);
+}

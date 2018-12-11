@@ -1,4 +1,5 @@
 import React from 'react';
+import ClampLines from 'react-clamp-lines';
 
 const YoutubeVideoDetail = ({ video }) => {
   if (!video) {
@@ -17,7 +18,14 @@ const YoutubeVideoDetail = ({ video }) => {
           {video.snippet.title}
           <div className="sub header">{video.snippet.channelTitle}</div>
         </h2>
-        <p>{`${video.snippet.description.substring(0, 100)}...`}</p>
+        <ClampLines
+          text={video.snippet.description}
+          lines={1}
+          ellipsis="..."
+          moreText="Show more"
+          lessText="Show less"
+          className=""
+        />
       </div>
     </div>
   );

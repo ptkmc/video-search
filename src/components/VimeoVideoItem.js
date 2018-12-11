@@ -1,17 +1,6 @@
 import React from 'react';
 import './VideoItem.css';
 
-//
-//   //   if (video.pictures.sizes[3].link) {
-//   //     return;
-//   //   }
-//   try {
-//     return video.pictures.sizes[3].link;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
 class VimeoVideoItem extends React.Component {
   getThumbnail = video => {
     for (let i = 3; i > -1; i--) {

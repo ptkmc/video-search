@@ -11,7 +11,7 @@ import YoutubeVideoDetail from './YoutubeVideoDetail';
 
 class App extends React.Component {
   state = {
-    defaultQuery: 'asdasdas',
+    defaultQuery: 'party',
     youtubeVideos: [],
     vimeoVideos: [],
     selectedYoutubeVideo: null,
