@@ -11,7 +11,7 @@ import YoutubeVideoDetail from './YoutubeVideoDetail';
 
 class App extends React.Component {
   state = {
-    defaultQuery: 'party',
+    defaultQuery: 'best',
     youtubeVideos: [],
     vimeoVideos: [],
     selectedYoutubeVideo: null,
@@ -54,27 +54,30 @@ class App extends React.Component {
   render() {
     return (
       <div className="ui container">
-        <div className="ui grid">
-          <div className="ui row header header-search">
-            <Headroom>
-              <div className="ui container" style={{ width: '50%' }}>
-                <SearchBar
-                  default={this.state.defaultQuery}
-                  onTermSubmit={this.onTermSubmit}
-                  loadingStatus={this.state.loadingStatus}
-                  onLoading={this.onLoading}
-                />
+        <div className="video-details-container">
+          <div className="header-search">
+            <div className="searchbar-container">
+              <SearchBar
+                default={this.state.defaultQuery}
+                onTermSubmit={this.onTermSubmit}
+                loadingStatus={this.state.loadingStatus}
+                onLoading={this.onLoading}
+              />
+            </div>
+          </div>
+          <div className="ui grid">
+            <div className="row">
+              <div className="eight wide column">
+                <YoutubeVideoDetail video={this.state.selectedYoutubeVideo} />
               </div>
-            </Headroom>
-          </div>
-          <div className="ui row video-details-container">
-            <div className="eight wide column">
-              <YoutubeVideoDetail video={this.state.selectedYoutubeVideo} />
-            </div>
-            <div className="eight wide column">
-              <VimeoVideoDetail video={this.state.selectedVimeoVideo} />
+              <div className="eight wide column">
+                <VimeoVideoDetail video={this.state.selectedVimeoVideo} />
+              </div>
             </div>
           </div>
+        </div>
+
+        <div className="ui grid container">
           <div className="ui row">
             <div className="eight wide column">
               <YoutubeVideoList

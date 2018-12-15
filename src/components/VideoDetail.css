@@ -1,0 +1,15 @@
+.video-description {
+  cursor: pointer;
+}
+
+.hide-content {
+  position: absolute;
+  /* using negative top like this preserves with width so the spacers can compute accurately */
+  top: -20000px;
+  box-sizing: inherit;
+}
+
+.show-content {
+  position: relative;
+  top: 0;
+}

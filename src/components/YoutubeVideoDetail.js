@@ -1,34 +1,43 @@
 import React from 'react';
-import ClampLines from 'react-clamp-lines';
+import VideoInfo from './VideoInfo';
+import './VideoDetail.css';
 
-const YoutubeVideoDetail = ({ video }) => {
-  if (!video) {
-    return <div>Loading...</div>;
+class YoutubeVideoDetail extends React.Component {
+  state = { truncatedText: true };
+
+  toggleTruncatedText = () => {
+    const isToggled = this.state.truncatedText;
+    this.setState({ truncatedText: !isToggled });
+  };
+
+  render() {
+    if (!this.props.video) {
+      return <div>Loading...</div>;
+    }
+    const { title, channelTitle, description } = this.props.video.snippet;
+    const videoSrc = `https://www.youtube.com/embed/${
+      this.props.video.id.videoId
+    }`;
+
+    return (
+      <div className="video-details">
+        <div className="ui embed">
+          <iframe title="video player" src={videoSrc} />
+        </div>
+        <div
+          className="ui segment video-description"
+          onClick={this.toggleTruncatedText}
+        >
+          <VideoInfo
+            title={title}
+            channelTitle={channelTitle}
+            description={description}
+            truncState={this.state.truncatedText}
+          />
+        </div>
+      </div>
+    );
   }
-
-  const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}`;
-
-  return (
-    <div className="video-details">
-      <div className="ui embed">
-        <iframe title="video player" src={videoSrc} />
-      </div>
-      <div className="ui segment">
-        <h2 className="ui medium header">
-          {video.snippet.title}
-          <div className="sub header">{video.snippet.channelTitle}</div>
-        </h2>
-        <ClampLines
-          text={video.snippet.description}
-          lines={1}
-          ellipsis="..."
-          moreText="Show more"
-          lessText="Show less"
-          className=""
-        />
-      </div>
-    </div>
-  );
-};
+}
 
 export default YoutubeVideoDetail;
