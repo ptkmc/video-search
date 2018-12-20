@@ -1,5 +1,5 @@
 import React from 'react';
-import './VideoItem.css';
+import Shiitake from 'shiitake';
 
 class VimeoVideoItem extends React.Component {
   getThumbnail = video => {
@@ -14,21 +14,25 @@ class VimeoVideoItem extends React.Component {
   render() {
     return (
       <div
+        className="item"
         onClick={() => this.props.onVideoSelect(this.props.video)}
-        className="video-item item right"
+        style={{ cursor: 'pointer' }}
       >
-        <div className="video-row">
+        <div className="ui small image">
           <img
-            className="ui image"
             src={this.getThumbnail(this.props.video)}
             alt={this.props.video.name}
           />
-          <div className="content">
-            <h4 className="ui small header">
-              {this.props.video.name}
-              <div className="sub header">{this.props.video.user.name}</div>
-            </h4>
+        </div>
+
+        <div className="ui content">
+          <div className="ui header">
+            <Shiitake lines={2}>{this.props.video.name}</Shiitake>
           </div>
+
+          <span className="ui meta">
+            <Shiitake lines={1}>{this.props.video.user.name}</Shiitake>
+          </span>
         </div>
       </div>
     );

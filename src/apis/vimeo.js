@@ -7,5 +7,8 @@ export default axios.create({
   baseURL: 'https://api.vimeo.com/',
   headers: {
     Authorization: `bearer ${KEY}`
+  },
+  params: {
+    per_page: '10'
   }
 });

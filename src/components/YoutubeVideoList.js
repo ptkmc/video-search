@@ -12,7 +12,7 @@ const YoutubeVideoList = ({ videos, onVideoSelect }) => {
     );
   });
 
-  return <div className="ui relaxed divided list">{renderedList}</div>;
+  return <div className="ui relaxed divided items">{renderedList}</div>;
 };
 
 export default YoutubeVideoList;

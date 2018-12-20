@@ -26,23 +26,3 @@
 .searchbar-container {
   width: 50%;
 }
-
-.headroom {
-  z-index: 2 !important;
-  padding: 6px 0 0 0;
-  display: flex;
-  justify-content: center;
-}
-
-.headroom--unpinned {
-  transition: none !important;
-}
-
-.clamp-lines__button {
-  font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-  color: rgb(0, 0, 0, 0.6);
-}
