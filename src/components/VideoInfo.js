@@ -1,4 +1,5 @@
 import React from 'react';
+import he from 'he';
 import Shiitake from 'shiitake';
 import './VideoDetail.css';
 
@@ -8,7 +9,10 @@ class VideoInfo extends React.Component {
   };
 
   render() {
-    const { title, channelTitle, description, truncState } = this.props;
+    let { title, channelTitle, description, truncState } = this.props;
+    title = he.decode(title);
+    channelTitle = he.decode(channelTitle);
+    description = he.decode(description);
     return (
       <div>
         <h2 className="ui medium header">

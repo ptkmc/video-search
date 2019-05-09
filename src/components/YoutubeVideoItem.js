@@ -1,5 +1,5 @@
-// https://react.semantic-ui.com/behaviors/visibility/#types-visibility
 import React from 'react';
+import he from 'he';
 import Shiitake from 'shiitake';
 import './VideoItem.css';
 
@@ -13,12 +13,14 @@ const YoutubeVideoItem = ({ video, onVideoSelect }) => {
         <div className="ui right floated">
           <span className="ui header">
             <Shiitake lines={2} className="clamp-header">
-              {video.snippet.title}
+              {he.decode(video.snippet.title)}
             </Shiitake>
           </span>
           <div className="ui meta">
             <span className="ui right floated">
-              <Shiitake lines={1}>{video.snippet.channelTitle}</Shiitake>
+              <Shiitake lines={1}>
+                {he.decode(video.snippet.channelTitle)}
+              </Shiitake>
             </span>
           </div>
         </div>
@@ -27,7 +29,7 @@ const YoutubeVideoItem = ({ video, onVideoSelect }) => {
       <div className="ui right floated small image">
         <img
           src={video.snippet.thumbnails.medium.url}
-          alt={video.snippet.title}
+          alt={he.decode(video.snippet.title)}
         />
       </div>
     </div>
