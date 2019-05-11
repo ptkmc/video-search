@@ -8,7 +8,7 @@ class SearchBar extends Component {
     loadingStatus: PropTypes.string
   };
 
-  state = { term: '' };
+  state = { term: '', placeholder: this.props.default };
 
   onInputChange = event => {
     this.setState({ term: event.target.value });
@@ -16,7 +16,12 @@ class SearchBar extends Component {
 
   onFormSubmit = event => {
     event.preventDefault();
-    this.props.onTermSubmit(this.state.term);
+    if (this.state.term === '') {
+      this.props.onTermSubmit(this.state.placeholder);
+    } else {
+      this.setState({ placeholder: this.state.term });
+      this.props.onTermSubmit(this.state.term);
+    }
   };
 
   render() {
@@ -27,7 +32,7 @@ class SearchBar extends Component {
             <input
               className="prompt"
               type="text"
-              placeholder={`${this.props.default}`}
+              placeholder={`${this.state.placeholder}`}
               onChange={this.onInputChange}
             />
             <i className="search icon" />

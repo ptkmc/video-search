@@ -18,6 +18,15 @@ class VideoDetail extends React.Component {
   render() {
     const video = this.props.video;
 
+    if (video === undefined) {
+      return (
+        <h3 className="ui medium header not-found">
+          No Results Found
+          <div className="ui sub header">Try different keywords</div>
+        </h3>
+      );
+    }
+
     if (!video) {
       return <div>Loading...</div>;
     }
@@ -33,7 +42,7 @@ class VideoDetail extends React.Component {
     } else {
       title = he.decode(video.name);
       username = he.decode(video.user.name);
-      description = he.decode(video.description) ? video.description : '';
+      description = video.description ? he.decode(video.description) : '';
       videoSrc = `https://player.vimeo.com/video/${
         /([^/]+$)/.exec(video.uri)[0]
       }`;
