@@ -3,19 +3,17 @@ import vimeo from '../apis/vimeo';
 import youtube from '../apis/youtube';
 import { animateScroll as scroll } from 'react-scroll';
 import SearchBar from './SearchBar';
-import VimeoVideoList from './VimeoVideoList';
-import VimeoVideoDetail from './VimeoVideoDetail';
-import YoutubeVideoList from './YoutubeVideoList';
-import YoutubeVideoDetail from './YoutubeVideoDetail';
+import VideoList from './VideoList';
+import VideoDetail from './VideoDetail';
 
 class App extends React.Component {
   state = {
-    defaultQuery: 'chill',
+    defaultQuery: 'travel',
     youtubeVideos: [],
     vimeoVideos: [],
     selectedYoutubeVideo: null,
     selectedVimeoVideo: null,
-    loadingStatus: 'loading'
+    loadingStatus: ''
   };
 
   componentDidMount() {
@@ -23,6 +21,7 @@ class App extends React.Component {
   }
 
   onTermSubmit = async term => {
+    this.setState({ loadingStatus: 'loading' });
     scroll.scrollToTop();
     const vimeoResponse = await vimeo.get('/videos', {
       params: { query: term }
@@ -30,11 +29,10 @@ class App extends React.Component {
     const youtubeResponse = await youtube.get('/search', {
       params: { q: term }
     });
-    console.log(youtubeResponse, vimeoResponse);
     this.setState({
       youtubeVideos: youtubeResponse.data.items,
-      selectedYoutubeVideo: youtubeResponse.data.items[0],
       vimeoVideos: vimeoResponse.data.data,
+      selectedYoutubeVideo: youtubeResponse.data.items[0],
       selectedVimeoVideo: vimeoResponse.data.data[0],
       loadingStatus: ''
     });
@@ -47,8 +45,6 @@ class App extends React.Component {
       this.setState({ selectedVimeoVideo: video });
     }
   };
-
-  onLoading = e => this.setState({ loadingStatus: 'loading' });
 
   render() {
     return (
@@ -67,10 +63,10 @@ class App extends React.Component {
           <div className="ui grid">
             <div className="row">
               <div className="eight wide column">
-                <YoutubeVideoDetail video={this.state.selectedYoutubeVideo} />
+                <VideoDetail video={this.state.selectedYoutubeVideo} />
               </div>
               <div className="eight wide column">
-                <VimeoVideoDetail video={this.state.selectedVimeoVideo} />
+                <VideoDetail video={this.state.selectedVimeoVideo} />
               </div>
             </div>
           </div>
@@ -79,13 +75,13 @@ class App extends React.Component {
         <div className="ui grid container">
           <div className="ui row">
             <div className="eight wide column">
-              <YoutubeVideoList
+              <VideoList
                 onVideoSelect={this.onVideoSelect}
                 videos={this.state.youtubeVideos}
               />
             </div>
             <div className="eight wide column">
-              <VimeoVideoList
+              <VideoList
                 onVideoSelect={this.onVideoSelect}
                 videos={this.state.vimeoVideos}
               />

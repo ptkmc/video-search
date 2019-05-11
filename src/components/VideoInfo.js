@@ -1,9 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import he from 'he';
 import Shiitake from 'shiitake';
 import './VideoDetail.css';
 
 class VideoInfo extends React.Component {
+  static propTypes = {
+    title: PropTypes.string,
+    channelTitle: PropTypes.string,
+    description: PropTypes.string,
+    truncState: PropTypes.bool
+  };
+
   toggleShow = visibility => {
     return visibility ? 'show-content' : 'hide-content';
   };

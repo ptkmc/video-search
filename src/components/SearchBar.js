@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-class SearchBar extends React.Component {
+class SearchBar extends Component {
+  static propTypes = {
+    default: PropTypes.string,
+    onTermSubmit: PropTypes.func,
+    loadingStatus: PropTypes.string
+  };
+
   state = { term: '' };
 
   onInputChange = event => {
@@ -9,7 +16,6 @@ class SearchBar extends React.Component {
 
   onFormSubmit = event => {
     event.preventDefault();
-    this.props.onLoading();
     this.props.onTermSubmit(this.state.term);
   };
 

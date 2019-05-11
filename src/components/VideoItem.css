@@ -1,7 +1,10 @@
+.video-item {
+  cursor: pointer;
+}
+
 .right-floated-item {
   display: flex !important;
   flex-direction: row !important;
-  cursor: pointer;
 }
 
 .content .right.floated {
