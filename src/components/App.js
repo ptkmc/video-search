@@ -8,7 +8,7 @@ import VideoDetail from './VideoDetail';
 
 class App extends React.Component {
   state = {
-    defaultQuery: 'animation',
+    defaultQuery: 'flying',
     youtubeVideos: [],
     vimeoVideos: [],
     selectedYoutubeVideo: null,

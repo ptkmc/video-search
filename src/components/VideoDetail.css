@@ -3,6 +3,14 @@
   word-wrap: break-word;
 }
 
+.youtube-detail {
+  background-color: hsla(0,100%,85%,.5) !important;
+}
+
+.vimeo-detail {
+  background-color: hsla(200,100%,85%,.5) !important;
+}
+
 .not-found {
   margin-top: 10px !important;
 }

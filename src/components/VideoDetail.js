@@ -45,7 +45,7 @@ class VideoDetail extends React.Component {
       description = video.description ? he.decode(video.description) : '';
       videoSrc = `https://player.vimeo.com/video/${
         /([^/]+$)/.exec(video.uri)[0]
-      }`;
+        }`;
     }
 
     return (
@@ -54,7 +54,7 @@ class VideoDetail extends React.Component {
           <iframe title="video player" src={videoSrc} />
         </div>
         <div
-          className="ui segment video-description"
+          className={`ui segment video-description ${isYoutubeVideo ? 'youtube-detail' : 'vimeo-detail'}`}
           onClick={this.toggleTruncatedText}
         >
           {this.state.truncatedText ? (
@@ -68,16 +68,16 @@ class VideoDetail extends React.Component {
               <Shiitake lines={2}>{description}</Shiitake>
             </div>
           ) : (
-            <div>
-              <h2 className="ui medium header">
-                <div>{title}</div>
-                <div className="sub header">
-                  <div>{username}</div>
-                </div>
-              </h2>
-              <div>{description}</div>
-            </div>
-          )}
+              <div>
+                <h2 className="ui medium header">
+                  <div>{title}</div>
+                  <div className="sub header">
+                    <div>{username}</div>
+                  </div>
+                </h2>
+                <div>{description}</div>
+              </div>
+            )}
         </div>
       </div>
     );
