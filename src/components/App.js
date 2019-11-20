@@ -1,6 +1,6 @@
 import React from 'react';
-import vimeo from '../apis/vimeo';
-import youtube from '../apis/youtube';
+import { vimeo, generateVimeoPlaceholders } from '../apis/vimeo';
+import { youtube, generateYoutubePlaceholders } from '../apis/youtube';
 import { animateScroll as scroll } from 'react-scroll';
 import SearchBar from './SearchBar';
 import VideoList from './VideoList';
@@ -8,7 +8,7 @@ import VideoDetail from './VideoDetail';
 
 class App extends React.Component {
   state = {
-    defaultQuery: 'travel',
+    defaultQuery: 'animation',
     youtubeVideos: [],
     vimeoVideos: [],
     selectedYoutubeVideo: null,
@@ -23,16 +23,30 @@ class App extends React.Component {
   onTermSubmit = async term => {
     this.setState({ loadingStatus: 'loading' });
     scroll.scrollToTop();
-    const vimeoResponse = await vimeo.get('/videos', {
-      params: { query: term }
-    });
-    const youtubeResponse = await youtube.get('/search', {
-      params: { q: term }
-    });
+
+    let vimeoResponse = null;
+    let youtubeResponse = null;
+
+    try {
+      vimeoResponse = await vimeo.get('/videos', {
+        params: { query: term }
+      });
+    } catch (err) {
+      vimeoResponse = vimeoResponse !== null ? vimeoResponse : generateVimeoPlaceholders();
+    }
+
+    try {
+      youtubeResponse = await youtube.get('/search', {
+        params: { q: term }
+      })
+    } catch (err) {
+      youtubeResponse = youtubeResponse !== null ? youtubeResponse : generateYoutubePlaceholders();
+    }
+
     this.setState({
-      youtubeVideos: youtubeResponse.data.items,
+      youtubeVideos: youtubeResponse && youtubeResponse.data.items,
+      selectedYoutubeVideo: youtubeResponse && youtubeResponse.data.items[0],
       vimeoVideos: vimeoResponse.data.data,
-      selectedYoutubeVideo: youtubeResponse.data.items[0],
       selectedVimeoVideo: vimeoResponse.data.data[0],
       loadingStatus: ''
     });

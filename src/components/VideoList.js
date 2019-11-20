@@ -3,7 +3,7 @@ import VideoItem from './VideoItem';
 import PropTypes from 'prop-types';
 
 const VideoList = ({ videos, onVideoSelect }) => {
-  const videoItemList = videos.map(video => {
+  const videoItems = videos.map(video => {
     const isYoutubeVideo = video.kind && video.kind === 'youtube#searchResult';
     return (
       <VideoItem
@@ -14,7 +14,8 @@ const VideoList = ({ videos, onVideoSelect }) => {
       />
     );
   });
-  return <div className="ui relaxed divided items">{videoItemList}</div>;
+
+  return <div className="ui relaxed divided items">{videoItems}</div>;
 };
 
 VideoList.propTypes = {
