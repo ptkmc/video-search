@@ -10,9 +10,9 @@
   z-index: 1;
   padding: 10px 0 0 0 !important;
   background-color: #ffffff !important;
-  -webkit-box-shadow: 0 8px 6px -6px black;
-  -moz-box-shadow: 0 8px 6px -6px black;
-  box-shadow: 0 8px 10px -10px black;
+  -webkit-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 8px 10px -10px rgba(0, 0, 0, 0.6);
 }
 
 .header-search {
